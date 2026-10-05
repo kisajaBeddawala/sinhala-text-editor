@@ -11,6 +11,10 @@ export const FONT_OPTIONS: FontOption[] = [
   { name: 'Noto Sans Sinhala', value: 'Noto Sans Sinhala', category: 'sinhala' },
   { name: 'Noto Serif Sinhala', value: 'Noto Serif Sinhala', category: 'sinhala' },
   { name: 'Abhaya Libre', value: 'Abhaya Libre', category: 'sinhala' },
+  { name: 'Anek Sinhala', value: 'Anek Sinhala', category: 'sinhala' },
+  { name: 'Gemunu Libre', value: 'Gemunu Libre', category: 'sinhala' },
+  { name: 'Stick No Bills', value: 'Stick No Bills', category: 'sinhala' },
+  { name: 'Inter', value: 'Inter', category: 'general' },
   { name: 'Noto Sans', value: 'Noto Sans', category: 'general' },
   { name: 'Noto Serif', value: 'Noto Serif', category: 'general' },
 ];

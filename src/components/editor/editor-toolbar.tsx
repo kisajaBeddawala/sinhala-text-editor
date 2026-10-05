@@ -33,8 +33,8 @@ export function EditorToolbar({
       {/* Left: Logo */}
       <div className="flex items-center gap-3">
         <div className="flex items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600">
-            <Sparkles className="h-4 w-4 text-white" />
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg overflow-hidden border border-slate-100 shadow-sm">
+            <img src="/logo.png" alt="Sinhala Canvas Logo" className="h-full w-full object-cover" />
           </div>
           <h1 className="text-lg font-bold text-slate-800 tracking-tight">
             Sinhala Canvas

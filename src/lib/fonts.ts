@@ -3,9 +3,13 @@ import { FONT_OPTIONS } from './presets';
 // Google Fonts URL for Sinhala fonts
 export function getGoogleFontsUrl(): string {
   const families = [
+    'Inter:wght@300;400;500;600;700',
     'Noto+Sans+Sinhala:wght@300;400;500;600;700;800;900',
     'Noto+Serif+Sinhala:wght@300;400;500;600;700;800;900',
     'Abhaya+Libre:wght@400;500;600;700;800',
+    'Anek+Sinhala:wght@300;400;500;600;700;800',
+    'Gemunu+Libre:wght@300;400;500;600;700;800',
+    'Stick+No+Bills:wght@300;400;500;600;700;800',
     'Noto+Sans:wght@300;400;500;600;700;800;900',
     'Noto+Serif:wght@300;400;500;600;700;800;900',
   ];
