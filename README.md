@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sinhala Canvas
+
+Sinhala Canvas is a modern, responsive web application built with **Next.js + TypeScript** that allows users to create beautiful Sinhala text-based images for social media.
+
+## Features
+
+- **Live Preview:** Immediate visual feedback with an accurate, 1:1 responsive preview of the final export.
+- **Sinhala Font Support:** Fully integrated with Sinhala web fonts (e.g., Noto Sans Sinhala, Abhaya Libre) for perfect Unicode rendering.
+- **Typography Controls:** Customization for font size, weight, bold, italic, line height, letter spacing, and alignment.
+- **Backgrounds:** Support for solid colors and gradients (with directional controls), along with beautiful built-in presets.
+- **Text Effects:** Toggles for customizable text shadows and text strokes.
+- **Canvas Presets:** Quick output sizing options (1:1, 4:5, 9:16, 16:9, etc.) and support for custom output resolutions.
+- **Local Storage State:** Your ongoing work is seamlessly persisted in your browser's local storage.
+- **Exporting:** High-quality PNG and JPG client-side exporting at precise chosen resolutions.
+- **History System:** Undo & Redo via UI or keyboard shortcuts (Ctrl+Z / Ctrl+Shift+Z).
+
+## Tech Stack
+
+- **Framework:** Next.js 16 (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS V4
+- **State/Hooks:** Custom React Hooks
+- **Icons:** Lucide React
 
 ## Getting Started
 
-First, run the development server:
-
+1. Install dependencies:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Run the development server:
+```bash
+npm run dev
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Usage
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Type or paste your Sinhala text into the left sidebar.
+2. Customize the appearance using the Typography, Colors, Background, and Effects sections.
+3. Select an Aspect Ratio or enter custom dimensions.
+4. Download the resulting image using the "Export PNG" or "JPG" buttons.

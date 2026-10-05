@@ -24,7 +24,7 @@ export function useEditorState() {
   } = useEditorHistory<EditorState>(savedState);
 
   // Sync state to localStorage (debounced)
-  const saveTimeoutRef = useRef<NodeJS.Timeout>();
+  const saveTimeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   useEffect(() => {
     if (!isHydrated) return;
