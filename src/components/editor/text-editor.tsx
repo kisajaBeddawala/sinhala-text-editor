@@ -9,7 +9,7 @@ interface TextEditorProps {
 }
 
 export function TextEditor({ text, onChange }: TextEditorProps) {
-  const [isSinglish, setIsSinglish] = useState(true);
+  const [isSinglish, setIsSinglish] = useState(false);
   const charCount = text.length;
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {

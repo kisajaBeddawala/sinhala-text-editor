@@ -71,6 +71,8 @@ export function PreviewCanvas({ state }: PreviewCanvasProps) {
 
     // ── Text Wrapping ─────────────────────────────────────
     const maxWidth = canvasWidth - state.padding * 2;
+    // Set native letter spacing (supported in modern browsers)
+    (ctx as any).letterSpacing = `${state.letterSpacing}px`;
     const lines = wrapText(ctx, state.text, maxWidth);
     const lineHeightPx = state.fontSize * state.lineHeight;
     const totalTextHeight = lines.length * lineHeightPx;
@@ -97,11 +99,7 @@ export function PreviewCanvas({ state }: PreviewCanvasProps) {
         ctx.lineJoin = 'round';
         ctx.shadowColor = 'transparent';
 
-        if (state.letterSpacing !== 0) {
-          drawTextWithLetterSpacing(ctx, line, adjustedX, y, state.letterSpacing, true);
-        } else {
-          ctx.strokeText(line, adjustedX, y);
-        }
+        ctx.strokeText(line, adjustedX, y);
         ctx.restore();
 
         // Restore shadow
@@ -117,18 +115,24 @@ export function PreviewCanvas({ state }: PreviewCanvasProps) {
       }
 
       // Fill
-      if (state.letterSpacing !== 0) {
-        drawTextWithLetterSpacing(ctx, line, adjustedX, y, state.letterSpacing, false);
-      } else {
-        ctx.fillText(line, adjustedX, y);
-      }
+      ctx.fillText(line, adjustedX, y);
     });
   }, [state]);
 
   // Redraw whenever state changes
   useEffect(() => {
     drawCanvas();
-  }, [drawCanvas]);
+    
+    // Ensure canvas redraws after font is loaded by the browser
+    if (typeof document !== 'undefined') {
+      const weight = state.bold ? Math.max(state.fontWeight, 700) : state.fontWeight;
+      document.fonts.load(`${weight} ${state.fontSize}px "${state.fontFamily}"`).then(() => {
+        drawCanvas();
+      }).catch(() => {
+        // Font might not be available or failed to load, fail silently
+      });
+    }
+  }, [drawCanvas, state.fontFamily, state.fontWeight, state.fontSize, state.bold]);
 
   // Calculate display scale
   const aspectRatio = state.canvasWidth / state.canvasHeight;
@@ -227,34 +231,6 @@ function wrapText(
   return lines;
 }
 
-function drawTextWithLetterSpacing(
-  ctx: CanvasRenderingContext2D,
-  text: string,
-  x: number,
-  y: number,
-  spacing: number,
-  isStroke: boolean
-): void {
-  const chars = Array.from(text);
-  const totalWidth =
-    ctx.measureText(text).width + (chars.length - 1) * spacing;
-  let offsetX = 0;
-
-  if (ctx.textAlign === 'center') offsetX = -totalWidth / 2;
-  else if (ctx.textAlign === 'right') offsetX = -totalWidth;
-
-  const savedAlign = ctx.textAlign;
-  ctx.textAlign = 'left';
-
-  for (const char of chars) {
-    const charX = x + offsetX;
-    if (isStroke) ctx.strokeText(char, charX, y);
-    else ctx.fillText(char, charX, y);
-    offsetX += ctx.measureText(char).width + spacing;
-  }
-
-  ctx.textAlign = savedAlign;
-}
 
 function hexToRgba(hex: string, opacity: number): string {
   const r = parseInt(hex.slice(1, 3), 16);

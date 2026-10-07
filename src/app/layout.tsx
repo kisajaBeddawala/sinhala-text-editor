@@ -51,7 +51,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           crossOrigin="anonymous"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Sinhala:wght@300;400;500;600;700;800;900&family=Noto+Serif+Sinhala:wght@300;400;500;600;700;800;900&family=Abhaya+Libre:wght@400;500;600;700;800&family=Anek+Sinhala:wght@300;400;500;600;700;800&family=Gemunu+Libre:wght@300;400;500;600;700;800&family=Stick+No+Bills:wght@300;400;500;600;700;800&family=Noto+Sans:wght@300;400;500;600;700;800;900&family=Noto+Serif:wght@300;400;500;600;700;800;900&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Sinhala:wght@300;400;500;600;700;800;900&family=Noto+Serif+Sinhala:wght@300;400;500;600;700;800;900&family=Abhaya+Libre:wght@400;500;600;700;800&family=Anek+Sinhala:wght@300;400;500;600;700;800&family=Gemunu+Libre:wght@300;400;500;600;700;800&family=Stick+No+Bills:wght@300;400;500;600;700;800&family=Post+No+Bills+Colombo:wght@300;400;500;600;700;800&family=Noto+Sans:wght@300;400;500;600;700;800;900&family=Noto+Serif:wght@300;400;500;600;700;800;900&display=swap"
           rel="stylesheet"
         />
       </head>

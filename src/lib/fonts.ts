@@ -10,6 +10,7 @@ export function getGoogleFontsUrl(): string {
     'Anek+Sinhala:wght@300;400;500;600;700;800',
     'Gemunu+Libre:wght@300;400;500;600;700;800',
     'Stick+No+Bills:wght@300;400;500;600;700;800',
+    'Post+No+Bills+Colombo:wght@300;400;500;600;700;800',
     'Noto+Sans:wght@300;400;500;600;700;800;900',
     'Noto+Serif:wght@300;400;500;600;700;800;900',
   ];

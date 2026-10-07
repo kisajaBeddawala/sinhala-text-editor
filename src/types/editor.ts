@@ -56,6 +56,13 @@ export interface FontOption {
   category: 'sinhala' | 'general';
 }
 
+export interface TemplatePreset {
+  id: string;
+  name: string;
+  description?: string;
+  state: Partial<EditorState>;
+}
+
 export interface EditorState {
   // Text
   text: string;

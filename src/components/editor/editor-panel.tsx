@@ -4,6 +4,7 @@ import { useState, ReactNode } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { EditorState } from '@/types/editor';
 import { TextEditor } from './text-editor';
+import { TemplatesGallery } from './templates-gallery';
 import { TypographyControls } from './typography-controls';
 import { ColorPicker } from './color-picker';
 import { BackgroundControls } from './background-controls';
@@ -25,6 +26,11 @@ export function EditorPanel({ state, updateField, updateFields, updateFieldLive 
         <TextEditor
           text={state.text}
           onChange={(text) => updateField('text', text)}
+        />
+        <TemplatesGallery
+          onSelectTemplate={(template) => {
+            updateFields(template.state);
+          }}
         />
       </Section>
 

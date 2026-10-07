@@ -61,6 +61,8 @@ export async function exportImage(
 
   // ── Wrap and Render Text ──────────────────────────────
   const maxWidth = canvasWidth - state.padding * 2;
+  // Set native letter spacing (supported in modern browsers)
+  (ctx as any).letterSpacing = `${state.letterSpacing}px`;
   const lines = wrapText(ctx, state.text, maxWidth);
   const lineHeightPx = state.fontSize * state.lineHeight;
   const totalTextHeight = lines.length * lineHeightPx;
@@ -88,11 +90,7 @@ export async function exportImage(
       // Temporarily disable shadow for stroke
       ctx.shadowColor = 'transparent';
 
-      if (state.letterSpacing !== 0) {
-        drawTextWithLetterSpacing(ctx, line, adjustedX, y, state.letterSpacing, true);
-      } else {
-        ctx.strokeText(line, adjustedX, y);
-      }
+      ctx.strokeText(line, adjustedX, y);
       ctx.restore();
 
       // Restore shadow for fill
@@ -104,11 +102,7 @@ export async function exportImage(
       }
     }
 
-    if (state.letterSpacing !== 0) {
-      drawTextWithLetterSpacing(ctx, line, adjustedX, y, state.letterSpacing, false);
-    } else {
-      ctx.fillText(line, adjustedX, y);
-    }
+    ctx.fillText(line, adjustedX, y);
   });
 
   // ── Export ────────────────────────────────────────────
@@ -209,43 +203,7 @@ function wrapText(
   return lines;
 }
 
-/**
- * Draw text with custom letter spacing (canvas doesn't natively support it).
- */
-function drawTextWithLetterSpacing(
-  ctx: CanvasRenderingContext2D,
-  text: string,
-  x: number,
-  y: number,
-  spacing: number,
-  isStroke: boolean
-): void {
-  const chars = Array.from(text);
-  const totalWidth = ctx.measureText(text).width + (chars.length - 1) * spacing;
-  let offsetX = 0;
 
-  // Adjust start position based on text alignment
-  if (ctx.textAlign === 'center') {
-    offsetX = -totalWidth / 2;
-  } else if (ctx.textAlign === 'right') {
-    offsetX = -totalWidth;
-  }
-
-  const savedAlign = ctx.textAlign;
-  ctx.textAlign = 'left';
-
-  for (const char of chars) {
-    const charX = x + offsetX;
-    if (isStroke) {
-      ctx.strokeText(char, charX, y);
-    } else {
-      ctx.fillText(char, charX, y);
-    }
-    offsetX += ctx.measureText(char).width + spacing;
-  }
-
-  ctx.textAlign = savedAlign;
-}
 
 /**
  * Convert hex color + opacity to rgba string.
