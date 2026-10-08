@@ -7,11 +7,13 @@ import { EditorToolbar } from './editor-toolbar';
 import { EditorPanel } from './editor-panel';
 import { PreviewCanvas } from './preview-canvas';
 import { Toast } from './toast';
+import { StoryGeneratorModal } from './story-generator-modal';
 
 export default function Editor() {
   const editor = useEditorState();
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
   const [isExporting, setIsExporting] = useState(false);
+  const [isStoryModalOpen, setIsStoryModalOpen] = useState(false);
 
   const showToast = useCallback((message: string, type: 'success' | 'error' = 'success') => {
     setToast({ message, type });
@@ -58,6 +60,7 @@ export default function Editor() {
         canRedo={editor.canRedo}
         onExport={handleExport}
         isExporting={isExporting}
+        onOpenStoryModal={() => setIsStoryModalOpen(true)}
       />
 
       {/* Main Content */}
@@ -87,6 +90,16 @@ export default function Editor() {
 
       {/* Toast */}
       {toast && <Toast message={toast.message} type={toast.type} />}
+
+      {/* Story Reels Modal */}
+      {isStoryModalOpen && (
+        <StoryGeneratorModal
+          state={editor.state}
+          updateField={editor.updateField}
+          updateFieldLive={editor.updateFieldLive}
+          onClose={() => setIsStoryModalOpen(false)}
+        />
+      )}
     </div>
   );
 }

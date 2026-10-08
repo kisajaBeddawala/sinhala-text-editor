@@ -7,6 +7,7 @@ import {
   Download,
   FilePlus,
   Sparkles,
+  Layers,
 } from 'lucide-react';
 
 interface EditorToolbarProps {
@@ -17,6 +18,7 @@ interface EditorToolbarProps {
   canRedo: boolean;
   onExport: (format: 'png' | 'jpg') => void;
   isExporting: boolean;
+  onOpenStoryModal: () => void;
 }
 
 export function EditorToolbar({
@@ -27,6 +29,7 @@ export function EditorToolbar({
   canRedo,
   onExport,
   isExporting,
+  onOpenStoryModal,
 }: EditorToolbarProps) {
   return (
     <header className="flex h-14 shrink-0 items-center justify-between border-b border-slate-200 bg-white px-4">
@@ -71,6 +74,13 @@ export function EditorToolbar({
 
       {/* Right: Export buttons */}
       <div className="hidden lg:flex items-center gap-2">
+        <button
+          onClick={onOpenStoryModal}
+          className="flex items-center gap-1.5 rounded-lg border border-purple-200 bg-purple-50 px-3 py-1.5 text-sm font-medium text-purple-700 hover:bg-purple-100 transition-colors mr-2"
+        >
+          <Layers className="h-4 w-4" />
+          Story Reels
+        </button>
         <button
           onClick={() => onExport('jpg')}
           disabled={isExporting}

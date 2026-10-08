@@ -246,3 +246,103 @@ export const FACEBOOK_TEMPLATES: TemplatePreset[] = [
     },
   },
 ];
+
+// ─── Reels Background Presets ────────────────────────────────
+export const STORY_REELS_BACKGROUNDS = [
+  {
+    name: 'Midnight Teal',
+    backgroundType: 'gradient' as const,
+    gradientStart: '#0f2027',
+    gradientEnd: '#203a43',
+    gradientDirection: 'to bottom right' as const,
+  },
+  {
+    name: 'Deep Ocean',
+    backgroundType: 'gradient' as const,
+    gradientStart: '#141e30',
+    gradientEnd: '#243b55',
+    gradientDirection: 'to bottom' as const,
+  },
+  {
+    name: 'Twilight Purple',
+    backgroundType: 'gradient' as const,
+    gradientStart: '#2b5876',
+    gradientEnd: '#4e4376',
+    gradientDirection: 'to top right' as const,
+  },
+  {
+    name: 'Misty Night',
+    backgroundType: 'gradient' as const,
+    gradientStart: '#1f1c2c',
+    gradientEnd: '#928dab',
+    gradientDirection: 'to bottom right' as const,
+  },
+  {
+    name: 'Sunset Glow',
+    backgroundType: 'gradient' as const,
+    gradientStart: '#ff416c',
+    gradientEnd: '#ff4b2b',
+    gradientDirection: 'to bottom right' as const,
+  },
+  {
+    name: 'Aurora Borealis',
+    backgroundType: 'gradient' as const,
+    gradientStart: '#00b4db',
+    gradientEnd: '#0083b0',
+    gradientDirection: 'to bottom' as const,
+  },
+  {
+    name: 'Cosmic Dust',
+    backgroundType: 'gradient' as const,
+    gradientStart: '#8e2de2',
+    gradientEnd: '#4a00e0',
+    gradientDirection: 'to bottom right' as const,
+  },
+  {
+    name: 'Deep Forest',
+    backgroundType: 'gradient' as const,
+    gradientStart: '#134e5e',
+    gradientEnd: '#71b280',
+    gradientDirection: 'to bottom left' as const,
+  },
+  {
+    name: 'Golden Hour',
+    backgroundType: 'gradient' as const,
+    gradientStart: '#f7971e',
+    gradientEnd: '#ffd200',
+    gradientDirection: 'to bottom right' as const,
+  },
+  {
+    name: 'Neon Cyan',
+    backgroundType: 'gradient' as const,
+    gradientStart: '#00d2ff',
+    gradientEnd: '#3a7bd5',
+    gradientDirection: 'to bottom' as const,
+  },
+  {
+    name: 'Cherry Blossom',
+    backgroundType: 'gradient' as const,
+    gradientStart: '#ec008c',
+    gradientEnd: '#fc6767',
+    gradientDirection: 'to bottom right' as const,
+  },
+  {
+    name: 'Ruby Red',
+    backgroundType: 'gradient' as const,
+    gradientStart: '#93291e',
+    gradientEnd: '#ed213a',
+    gradientDirection: 'to top right' as const,
+  },
+  {
+    name: 'Velvet Plum',
+    backgroundType: 'gradient' as const,
+    gradientStart: '#33001b',
+    gradientEnd: '#ff0084',
+    gradientDirection: 'to bottom right' as const,
+  },
+  {
+    name: 'Dark Void',
+    backgroundType: 'solid' as const,
+    backgroundColor: '#1a1a2e',
+  }
+];

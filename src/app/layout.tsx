@@ -9,6 +9,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL("http://localhost:3000"),
   title: "Sinhala Canvas — Create Beautiful Sinhala Text Images",
   description: "A modern text-to-image editor for creating stunning Sinhala quote images, social media posts, and typography art. Free, fast, and works entirely in your browser.",
   keywords: ["sinhala", "quotes", "text to image", "sinhala canvas", "sinhala quotes maker", "sri lanka", "social media post maker", "singlish to sinhala"],
