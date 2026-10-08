@@ -40,19 +40,6 @@ export function PreviewCanvas({ state }: PreviewCanvasProps) {
     ctx.fillStyle = state.textColor;
     ctx.textBaseline = 'top';
 
-    // Alignment
-    let textAlignX: number;
-    if (state.textAlign === 'left') {
-      ctx.textAlign = 'left';
-      textAlignX = state.padding;
-    } else if (state.textAlign === 'right') {
-      ctx.textAlign = 'right';
-      textAlignX = canvasWidth - state.padding;
-    } else {
-      ctx.textAlign = 'center';
-      textAlignX = canvasWidth / 2;
-    }
-
     // ── Shadow ────────────────────────────────────────────
     if (state.textShadow.enabled) {
       ctx.shadowColor = hexToRgba(
@@ -74,18 +61,38 @@ export function PreviewCanvas({ state }: PreviewCanvasProps) {
     // Set native letter spacing (supported in modern browsers)
     (ctx as any).letterSpacing = `${state.letterSpacing}px`;
     const lines = wrapText(ctx, state.text, maxWidth);
+    
+    // Calculate actual text block width
+    let actualTextWidth = 0;
+    lines.forEach(line => {
+      const w = ctx.measureText(line).width;
+      if (w > actualTextWidth) actualTextWidth = w;
+    });
+
     const lineHeightPx = state.fontSize * state.lineHeight;
     const totalTextHeight = lines.length * lineHeightPx;
 
-    // Position
+    // Position Y
     const availableHeight = canvasHeight - state.padding * 2;
     const startY =
       state.padding +
       (availableHeight - totalTextHeight) * (state.positionY / 100);
 
-    const posXOffset =
-      ((state.positionX - 50) / 100) * (canvasWidth - state.padding * 2);
-    const adjustedX = textAlignX + posXOffset;
+    // Position X (Text Block)
+    const movableWidth = Math.max(0, maxWidth - actualTextWidth);
+    const blockLeftX = state.padding + (state.positionX / 100) * movableWidth;
+
+    let adjustedX: number;
+    if (state.textAlign === 'left') {
+      ctx.textAlign = 'left';
+      adjustedX = blockLeftX;
+    } else if (state.textAlign === 'right') {
+      ctx.textAlign = 'right';
+      adjustedX = blockLeftX + actualTextWidth;
+    } else {
+      ctx.textAlign = 'center';
+      adjustedX = blockLeftX + actualTextWidth / 2;
+    }
 
     // ── Draw Lines ────────────────────────────────────────
     lines.forEach((line, index) => {

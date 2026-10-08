@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, ReactNode } from 'react';
+import { useState, ReactNode, createContext, useContext, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { EditorState } from '@/types/editor';
 import { TextEditor } from './text-editor';
@@ -19,14 +19,39 @@ interface EditorPanelProps {
   updateFieldLive: <K extends keyof EditorState>(field: K, value: EditorState[K]) => void;
 }
 
+const ToggleContext = createContext<{ action: 'expand' | 'collapse'; t: number } | null>(null);
+
 export function EditorPanel({ state, updateField, updateFields, updateFieldLive }: EditorPanelProps) {
+  const [toggleSignal, setToggleSignal] = useState<{ action: 'expand' | 'collapse'; t: number } | null>(null);
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const toggleAll = () => {
+    const newAction = isExpanded ? 'collapse' : 'expand';
+    setIsExpanded(!isExpanded);
+    setToggleSignal({ action: newAction, t: Date.now() });
+  };
+
   return (
-    <div className="divide-y divide-slate-100">
+    <ToggleContext.Provider value={toggleSignal}>
+      <div className="flex flex-col">
+        <div className="flex items-center justify-between px-4 py-2 border-b border-slate-200 bg-slate-50 sticky top-0 z-10">
+          <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Settings</span>
+          <button 
+            onClick={toggleAll} 
+            className="text-xs text-indigo-600 hover:text-indigo-700 font-medium transition-colors"
+          >
+            {isExpanded ? 'Collapse All' : 'Expand All'}
+          </button>
+        </div>
+        <div className="divide-y divide-slate-100">
       <Section title="Text" defaultOpen>
         <TextEditor
           text={state.text}
           onChange={(text) => updateField('text', text)}
         />
+      </Section>
+
+      <Section title="Popular Templates" defaultOpen={false}>
         <TemplatesGallery
           onSelectTemplate={(template) => {
             updateFields(template.state);
@@ -82,7 +107,9 @@ export function EditorPanel({ state, updateField, updateFields, updateFieldLive 
           updateFields={updateFields}
         />
       </Section>
-    </div>
+        </div>
+      </div>
+    </ToggleContext.Provider>
   );
 }
 
@@ -97,6 +124,13 @@ function Section({
   defaultOpen?: boolean;
 }) {
   const [isOpen, setIsOpen] = useState(defaultOpen);
+  const toggleSignal = useContext(ToggleContext);
+
+  useEffect(() => {
+    if (toggleSignal) {
+      setIsOpen(toggleSignal.action === 'expand');
+    }
+  }, [toggleSignal]);
 
   return (
     <div>
