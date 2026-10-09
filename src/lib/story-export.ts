@@ -273,9 +273,12 @@ export async function exportStoryVideo(
           return;
         }
 
-        const pageIndex = Math.floor(elapsed / (durationPerPageSeconds * 1000));
+        const safeElapsed = Math.max(0, elapsed);
+        const pageIndex = Math.floor(safeElapsed / (durationPerPageSeconds * 1000));
+        const safePageIndex = Math.max(0, Math.min(pageIndex, pages.length - 1));
+        
         masterCtx!.clearRect(0, 0, canvasWidth, canvasHeight);
-        masterCtx!.drawImage(renderedPages[Math.min(pageIndex, pages.length - 1)], 0, 0);
+        masterCtx!.drawImage(renderedPages[safePageIndex], 0, 0);
 
         requestAnimationFrame(drawFrame);
       }
