@@ -8,12 +8,14 @@ import { EditorPanel } from './editor-panel';
 import { PreviewCanvas } from './preview-canvas';
 import { Toast } from './toast';
 import { StoryGeneratorModal } from './story-generator-modal';
+import { MoviePostModal } from './movie-post-modal';
 
 export default function Editor() {
   const editor = useEditorState();
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
   const [isExporting, setIsExporting] = useState(false);
   const [isStoryModalOpen, setIsStoryModalOpen] = useState(false);
+  const [isMovieModalOpen, setIsMovieModalOpen] = useState(false);
 
   const showToast = useCallback((message: string, type: 'success' | 'error' = 'success') => {
     setToast({ message, type });
@@ -61,6 +63,7 @@ export default function Editor() {
         onExport={handleExport}
         isExporting={isExporting}
         onOpenStoryModal={() => setIsStoryModalOpen(true)}
+        onOpenMovieModal={() => setIsMovieModalOpen(true)}
       />
 
       {/* Main Content */}
@@ -98,6 +101,13 @@ export default function Editor() {
           updateField={editor.updateField}
           updateFieldLive={editor.updateFieldLive}
           onClose={() => setIsStoryModalOpen(false)}
+        />
+      )}
+
+      {/* Movie Post Modal */}
+      {isMovieModalOpen && (
+        <MoviePostModal
+          onClose={() => setIsMovieModalOpen(false)}
         />
       )}
     </div>
